@@ -11,10 +11,10 @@ validates the skills.
 
 First, [install Copier][copier-install].
 
-From a local checkout of this template, run:
+To create a project, run Copier and answer the prompts:
 
 ```bash
-copier copy . path/to/your/project
+copier copy 'https://github.com/vivienm/copier-skills' path/to/your/project
 ```
 
 Then enter the generated project and initialize its Git repository:
@@ -31,8 +31,8 @@ Replace the `do-something` example with your own skill and update the list in
 prettier --write --prose-wrap always --print-width 80 '**/*.md'
 ```
 
-If you generated the project from a Git checkout of this template, commit your
-project files. Later, from a clean working tree, run:
+Commit your project files. To update the project later, run the following from a
+clean working tree:
 
 ```bash
 copier update --skip-answered
