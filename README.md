@@ -25,10 +25,10 @@ git init -b main
 ```
 
 Replace the `do-something` example with your own skill and update the list in
-`README.md`. With [Prettier] on your `PATH`, format the Markdown files:
+`README.md`. With [npm] installed, format the Markdown files:
 
 ```bash
-prettier --write --prose-wrap always --print-width 80 '**/*.md'
+npx --yes prettier --write --prose-wrap always --print-width 80 '**/*.md'
 ```
 
 Commit your project files. To update the project later, run the following from a
@@ -41,4 +41,4 @@ copier update --skip-answered
 [Copier]: https://copier.readthedocs.io/en/stable/
 [Agent Skills]: https://agentskills.io/
 [copier-install]: https://copier.readthedocs.io/en/stable/#installation
-[Prettier]: https://prettier.io/docs/install
+[npm]: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm

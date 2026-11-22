@@ -9,9 +9,9 @@ or removing skills.
 
 ## Markdown formatting
 
-With `prettier` on your `PATH`, run this command from the repository root after
-editing Markdown:
+With npm installed, run this command from the repository root after editing
+Markdown:
 
 ```sh
-prettier --write --prose-wrap always --print-width 80 '**/*.md'
+npx --yes prettier --write --prose-wrap always --print-width 80 '**/*.md'
 ```
