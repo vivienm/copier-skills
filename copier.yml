@@ -1,0 +1,97 @@
+_envops:
+  trim_blocks: true
+
+_subdirectory: "template"
+
+project_name:
+  help: "Project name"
+  type: "str"
+  placeholder: "Lorem Ipsum"
+  validator: >
+    {%- if not project_name -%}
+    You must provide a project name.
+    {%- endif -%}
+
+project_slug:
+  when: false
+  default: "{{ project_name | lower | replace(' ', '-') | replace('_', '-') }}"
+
+project_description:
+  help: "Project description"
+  type: "str"
+  placeholder: "Lorem ipsum dolor sit amet."
+  validator: >
+    {%- if not project_description -%}
+    You must provide a project description.
+    {%- elif project_description[-1] not in ".!?…" -%}
+    The project description must end with a punctuation mark.
+    {%- endif -%}
+
+user_name:
+  help: "Your full name"
+  type: "str"
+  placeholder: "John Doe"
+  validator: >
+    {%- if not user_name -%}
+    You must provide your full name.
+    {%- endif -%}
+
+license:
+  help: "Project license"
+  type: "str"
+  choices:
+    - "MIT"
+    - "Proprietary"
+  default: "Proprietary"
+
+copyright_holder:
+  help: "Name of the person or entity holding the copyright"
+  type: "str"
+  default: "{{ user_name }}"
+  validator: >
+    {%- if not copyright_holder -%}
+    You must provide a copyright holder.
+    {%- endif -%}
+
+copyright_year:
+  help: "Copyright year"
+  type: "int"
+  default: "{{ copyright_year | default('%Y' | strftime) }}"
+  validator: >
+    {%- if not 2020 <= copyright_year <= 2100 -%}
+    You must provide a valid year between 2020 and 2100.
+    {%- endif -%}
+
+forge:
+  help: "Code hosting platform for the project"
+  type: "str"
+  choices:
+    - "none"
+    - "github"
+
+github_user:
+  when: "{{ forge == 'github' }}"
+  help: "GitHub account (username or organization)"
+  type: "str"
+  placeholder: "jdoe"
+  validator: >
+    {%- if not github_user -%}
+    You must provide a GitHub account.
+    {%- endif -%}
+
+github_repo:
+  when: "{{ forge == 'github' }}"
+  help: "Name of the GitHub repository"
+  type: "str"
+  default: "{{ project_slug }}"
+  validator: >
+    {%- if not github_repo -%}
+    You must provide a repository name.
+    {%- endif -%}
+
+repo_url:
+  when: false
+  default: >
+    {%- if forge == 'github' -%}
+    https://github.com/{{ github_user }}/{{ github_repo }}
+    {%- endif -%}

@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate skills
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Check Markdown formatting
+        run: npx --yes prettier --check --prose-wrap always --print-width 80 '**/*.md'
+      - name: Validate skills
+        run: gh skill publish --dry-run
+        env:
+          GH_TOKEN: ${{ github.token }}
